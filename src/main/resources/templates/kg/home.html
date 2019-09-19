@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="share/layout">
 
@@ -236,6 +236,7 @@
                 </div>
 
                 <div v-show="tipsshow" id="operatetips" class="operatetips">
+                    <span style="color:red;position:absolute;top:6px;left:10px;cursor:pointer;" @click="btntipsclose">x</span>
                     <h3>tips</h3>
                     <ul>
                         <li>1.选中节点或者节点名称，双击修改名称</li>
