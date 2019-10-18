@@ -43,4 +43,4 @@ img:  #//如果是Windows情况下，格式是 D:\\blog\\image\\   linx 格式"/
    location : D:\\blog\\image\\
 file:
   serverurl:  http://localhost:8089
-  location : D:\\kgmanager\\csv\\   #如果是Windows情况下，格式是 D:\\kgmanager\\csv\\   linx 格式"/home/kgmanager/csv/";
+  location : /home/logic/csv/   #如果是Windows情况下，格式是 D:\\kgmanager\\csv\\   linx 格式"/home/kgmanager/csv/";
