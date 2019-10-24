@@ -1,23 +1,26 @@
 ﻿var app = new Vue({
     el: '#app',
     data: {
-        svg:null,
-        timer:null,
-        editor:null,
-        simulation:null,
-        linkGroup:null,
-        linktextGroup:null,
-        nodeGroup:null,
-        nodetextGroup:null,
-        nodesymbolGroup:null,
-        nodebuttonGroup:null,
-        nodebuttonAction:'',
-        tooltip:null,
-        tipsshow:true,
-        txx:{},
-        tyy:{},
-        nodedetail:null,
-        pagesizelist: [{size: 100, isactive: true}, {size: 500, isactive: false}, {size: 1000,isactive: false}, {size: 2000, isactive: false}],
+        svg: null,
+        timer: null,
+        editor: null,
+        simulation: null,
+        linkGroup: null,
+        linktextGroup: null,
+        nodeGroup: null,
+        nodetextGroup: null,
+        nodesymbolGroup: null,
+        nodebuttonGroup: null,
+        nodebuttonAction: '',
+        tooltip: null,
+        tipsshow: true,
+        txx: {},
+        tyy: {},
+        nodedetail: null,
+        pagesizelist: [{size: 100, isactive: true}, {size: 500, isactive: false}, {
+            size: 1000,
+            isactive: false
+        }, {size: 2000, isactive: false}],
         colorList: ["#ff8373", "#f9c62c", "#a5ca34", "#6fce7a", "#70d3bd", "#ea91b0"],
         color5: '#ff4500',
         predefineColors: ['#ff4500', '#ff8c00', '#90ee90', '#00ced1', '#1e90ff', '#c71585'],
@@ -39,13 +42,14 @@
         sourcenodey1: 0,
         mousex: 0,
         mousey: 0,
+        int : 0,
         domain: '',
         domainid: 0,
         nodename: '',
         pagesize: 100,
-        cyphertext:'',
-        cyphertextshow:false,
-        jsonshow:false,
+        cyphertext: '',
+        cyphertextshow: false,
+        jsonshow: false,
         propactiveName: 'propedit',
         contentactiveName: 'propimage',
         uploadimageurl: contextRoot + "qiniu/upload",
@@ -108,28 +112,28 @@
         this.getlabels();
     },
     methods: {
-    	btntipsclose(){
-    		this.tipsshow=false;
-    	},
-        showCypher(){
-            this.cyphertextshow=!this.cyphertextshow;
+        btntipsclose() {
+            this.tipsshow = false;
         },
-        cypherjson(){
-            if(this.graph.nodes.length==0&&this.graph.links.length==0){
+        showCypher() {
+            this.cyphertextshow = !this.cyphertextshow;
+        },
+        cypherjson() {
+            if (this.graph.nodes.length == 0 && this.graph.links.length == 0) {
                 this.$message.error("请先选择领域或者执行cypher");
                 return;
             }
-            this.jsonshow=!this.jsonshow;
-            var json=this.graph;
-            var options={
-                collapsed:false,//收缩所有节点
-                withQuotes:false//为key添加双引号
+            this.jsonshow = !this.jsonshow;
+            var json = this.graph;
+            var options = {
+                collapsed: false,//收缩所有节点
+                withQuotes: false//为key添加双引号
             };
-            $("#json-renderer").JSONView(json,options);
+            $("#json-renderer").JSONView(json, options);
         },
-        cypherrun(){
+        cypherrun() {
             var _this = this;
-            if(_this.cyphertext==""){
+            if (_this.cyphertext == "") {
                 _this.$message.error("请输入cypher语句");
                 return;
             }
@@ -143,14 +147,14 @@
                         _this.graph.nodes = result.data.node;
                         _this.graph.links = result.data.relationship;
                         _this.updategraph();
-                    }else{
+                    } else {
                         _this.$message.error(result.msg);
                     }
                 }
             })
         },
         initEditor() {
-            var  _this=this;
+            var _this = this;
             if (_this.editor != null) return;
             var E = window.wangEditor;
             _this.editor = new E(this.$refs.eidtorToolbar, this.$refs.eidtorContent);
@@ -343,10 +347,10 @@
                 element.msRequestFullscreen();
             }
         },
-        getalldomaingpraph(){
+        getalldomaingpraph() {
             var _this = this;
             _this.loading = true;
-            var date ={
+            var data = {
                 pageSize: _this.pagesize
             }
             $.ajax(
@@ -407,7 +411,7 @@
                 }
             });
         },
-        btnaddsingle(){
+        btnaddsingle() {
             d3.select('.graphcontainer').style("cursor", "crosshair");//进入新增模式，鼠标变成＋
         },
         btndeletelink() {
@@ -430,7 +434,7 @@
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
                         });
@@ -446,7 +450,7 @@
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
                         });
@@ -468,14 +472,14 @@
             $("#link_menubar").hide();
             this.operatetype = 3;
         },
-        deletedomain(id,value) {
+        deletedomain(id, value) {
             var _this = this;
             _this.$confirm('此操作将删除该标签及其下节点和关系(不可恢复), 是否继续?', '三思而后行', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function (res) {
-                var data = {domainid:id,domain: value};
+                var data = {domainid: id, domain: value};
                 $.ajax({
                     data: data,
                     type: "POST",
@@ -506,7 +510,7 @@
                 confirmButtonText: '确定',
                 cancelButtonText: '取消'
             }).then(function (res) {
-                value=res.value;
+                value = res.value;
                 var data = {domain: value};
                 $.ajax({
                     data: data,
@@ -545,28 +549,28 @@
                     if (result.code == 200) {
                         //_this.domainlabels=result.data;
                         _this.pageModel = result.data;
-                        _this.pageModel.totalPage=parseInt((result.data.totalCount-1)/result.data.pageSize)+1
+                        _this.pageModel.totalPage = parseInt((result.data.totalCount - 1) / result.data.pageSize) + 1
                     }
                 }
             });
         },
         getmoredomain() {
             var _this = this;
-            _this.pageModel.pageIndex=_this.pageModel.pageIndex+1;
-            var data = {pageIndex:_this.pageModel.pageIndex};
+            _this.pageModel.pageIndex = _this.pageModel.pageIndex + 1;
+            var data = {pageIndex: _this.pageModel.pageIndex};
             $.ajax({
                 data: data,
                 type: "POST",
                 url: contextRoot + "getgraph",
                 success: function (result) {
                     if (result.code == 200) {
-                    	_this.pageModel.nodeList.push.apply(_this.pageModel.nodeList,result.data.nodeList);
-                    	//_this.pageModel.nodeList.concat(result.data.nodeList);
+                        _this.pageModel.nodeList.push.apply(_this.pageModel.nodeList, result.data.nodeList);
+                        //_this.pageModel.nodeList.concat(result.data.nodeList);
                     }
                 }
             });
         },
-        initgraph(){
+        initgraph() {
             var graphcontainer = d3.select(".graphcontainer");
             var width = graphcontainer._groups[0][0].offsetWidth;
             var height = window.screen.height - 154;//
@@ -574,7 +578,7 @@
             this.svg.attr("width", width);
             this.svg.attr("height", height);
             this.simulation = d3.forceSimulation()
-                .force("link", d3.forceLink().distance(function(d){
+                .force("link", d3.forceLink().distance(function (d) {
                     return Math.floor(Math.random() * (700 - 200)) + 200;
                 }).id(function (d) {
                     return d.uuid
@@ -589,8 +593,8 @@
             this.nodesymbolGroup = this.svg.append("g").attr("class", "nodesymbol");
             this.nodebuttonGroup = this.svg.append("g").attr("class", "nodebutton");
             this.addmaker();
-            this.tooltip =  this.svg.append("div").style("opacity", 0);
-            this.svg.on('click',function(){
+            this.tooltip = this.svg.append("div").style("opacity", 0);
+            this.svg.on('click', function () {
                 d3.selectAll(".buttongroup").classed("circle_opreate", true);
             }, 'false');
 
@@ -602,62 +606,62 @@
             var links = [];
             //由后端传过来的节点坐标，固定节点，由于是字符串，需要转换
             nodes.forEach(function (n) {
-                if(typeof (n.fx)=="undefined"||n.fx==""||n.fx==null){
-                    n.fx=null;
+                if (typeof (n.fx) == "undefined" || n.fx == "" || n.fx == null) {
+                    n.fx = null;
                 }
-                if(typeof (n.fy)=="undefined"||n.fy==""||n.fy==null){
-                    n.fy=null;
+                if (typeof (n.fy) == "undefined" || n.fy == "" || n.fy == null) {
+                    n.fy = null;
                 }
-                if((typeof n.fx) == "string") n.fx = parseFloat(n.fx);
-                if((typeof n.fy) == "string") n.fy = parseFloat(n.fy);
+                if ((typeof n.fx) == "string") n.fx = parseFloat(n.fx);
+                if ((typeof n.fy) == "string") n.fy = parseFloat(n.fy);
             });
             lks.forEach(function (m) {
                 var sourceNode = nodes.filter(function (n) {
                     return n.uuid === m.sourceid;
                 })[0];
-                if (typeof(sourceNode) == 'undefined') return;
+                if (typeof (sourceNode) == 'undefined') return;
                 var targetNode = nodes.filter(function (n) {
                     return n.uuid === m.targetid;
                 })[0];
-                if (typeof(targetNode) == 'undefined') return;
+                if (typeof (targetNode) == 'undefined') return;
                 links.push({source: sourceNode.uuid, target: targetNode.uuid, lk: m});
             });
             //为每一个节点定制按钮组
             _this.addnodebutton();
-           if(links.length>0){
-               _.each(links, function(link) {
-                   var same = _.where(links, {
-                       'source': link.source,
-                       'target': link.target
-                   });
-                   var sameAlt = _.where(links, {
-                       'source': link.target,
-                       'target': link.source
-                   });
-                   var sameAll = same.concat(sameAlt);
-                   _.each(sameAll, function(s, i) {
-                       s.sameIndex = (i + 1);
-                       s.sameTotal = sameAll.length;
-                       s.sameTotalHalf = (s.sameTotal / 2);
-                       s.sameUneven = ((s.sameTotal % 2) !== 0);
-                       s.sameMiddleLink = ((s.sameUneven === true) &&(Math.ceil(s.sameTotalHalf) === s.sameIndex));
-                       s.sameLowerHalf = (s.sameIndex <= s.sameTotalHalf);
-                       s.sameArcDirection = 1;
-                       //s.sameArcDirection = s.sameLowerHalf ? 0 : 1;
-                       s.sameIndexCorrected = s.sameLowerHalf ? s.sameIndex : (s.sameIndex - Math.ceil(s.sameTotalHalf));
-                   });
-               });
-               var maxSame = _.chain(links)
-                   .sortBy(function(x) {
-                       return x.sameTotal;
-                   })
-                   .last()
-                   .value().sameTotal;
+            if (links.length > 0) {
+                _.each(links, function (link) {
+                    var same = _.where(links, {
+                        'source': link.source,
+                        'target': link.target
+                    });
+                    var sameAlt = _.where(links, {
+                        'source': link.target,
+                        'target': link.source
+                    });
+                    var sameAll = same.concat(sameAlt);
+                    _.each(sameAll, function (s, i) {
+                        s.sameIndex = (i + 1);
+                        s.sameTotal = sameAll.length;
+                        s.sameTotalHalf = (s.sameTotal / 2);
+                        s.sameUneven = ((s.sameTotal % 2) !== 0);
+                        s.sameMiddleLink = ((s.sameUneven === true) && (Math.ceil(s.sameTotalHalf) === s.sameIndex));
+                        s.sameLowerHalf = (s.sameIndex <= s.sameTotalHalf);
+                        s.sameArcDirection = 1;
+                        //s.sameArcDirection = s.sameLowerHalf ? 0 : 1;
+                        s.sameIndexCorrected = s.sameLowerHalf ? s.sameIndex : (s.sameIndex - Math.ceil(s.sameTotalHalf));
+                    });
+                });
+                var maxSame = _.chain(links)
+                    .sortBy(function (x) {
+                        return x.sameTotal;
+                    })
+                    .last()
+                    .value().sameTotal;
 
-               _.each(links, function(link) {
-                   link.maxSameHalf = Math.round(maxSame / 2);
-               });
-           }
+                _.each(links, function (link) {
+                    link.maxSameHalf = Math.round(maxSame / 2);
+                });
+            }
             // 更新连线 links
             var link = _this.linkGroup.selectAll(".line >path").data(links, function (d) {
                 return d.uuid;
@@ -716,7 +720,7 @@
             nodesymbol = nodesymbolEnter.merge(nodesymbol);
             nodesymbol.attr("fill", "#e15500");
             nodesymbol.attr("display", function (d) {
-                if (typeof(d.hasfile) != "undefined" && d.hasfile > 0) {
+                if (typeof (d.hasfile) != "undefined" && d.hasfile > 0) {
                     return "block";
                 }
                 return "none";
@@ -724,17 +728,18 @@
             _this.simulation.nodes(nodes).on("tick", ticked);
             _this.simulation.force("link").links(links);
             _this.simulation.alphaTarget(1).restart();
+
             function linkArc(d) {
                 var dx = (d.target.x - d.source.x),
                     dy = (d.target.y - d.source.y),
                     dr = Math.sqrt(dx * dx + dy * dy),
                     unevenCorrection = (d.sameUneven ? 0 : 0.5);
                 var curvature = 2,
-                    arc = (1.0/curvature)*((dr * d.maxSameHalf) / (d.sameIndexCorrected - unevenCorrection));
+                    arc = (1.0 / curvature) * ((dr * d.maxSameHalf) / (d.sameIndexCorrected - unevenCorrection));
                 if (d.sameMiddleLink) {
                     arc = 0;
                 }
-                var dd="M" + d.source.x + "," + d.source.y + "A" + arc + "," + arc + " 0 0," + d.sameArcDirection + " " + d.target.x + "," + d.target.y;
+                var dd = "M" + d.source.x + "," + d.source.y + "A" + arc + "," + arc + " 0 0," + d.sameArcDirection + " " + d.target.x + "," + d.target.y;
                 return dd;
             }
 
@@ -754,8 +759,8 @@
                     .attr("cy", function (d) {
                         return d.y;
                     });
-               nodebutton.attr("transform", function (d) {
-                    return "translate(" + d.x + "," + d.y+ ") scale(1)";
+                nodebutton.attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ") scale(1)";
                 });
 
                 // 更新文字坐标
@@ -770,29 +775,30 @@
                     return "translate(" + (d.x + 8) + "," + (d.y - 30) + ") scale(0.015,0.015)";
                 })
             }
+
             // 鼠标滚轮缩放
             //_this.svg.call(d3.zoom().transform, d3.zoomIdentity);//缩放至初始倍数
             _this.svg.call(d3.zoom().on("zoom", function () {
-            	d3.select('#link_menubar').style('display', 'none');
-            	d3.select('#nodedetail').style('display', 'none');
-                d3.selectAll('.node').attr("transform",d3.event.transform);
-                d3.selectAll('.nodetext').attr("transform",d3.event.transform);
-                d3.selectAll('.line').attr("transform",d3.event.transform);
-                d3.selectAll('.linetext').attr("transform",d3.event.transform);
-                d3.selectAll('.nodesymbol').attr("transform",d3.event.transform);
-                d3.selectAll('.nodebutton').attr("transform",d3.event.transform);
+                d3.select('#link_menubar').style('display', 'none');
+                d3.select('#nodedetail').style('display', 'none');
+                d3.selectAll('.node').attr("transform", d3.event.transform);
+                d3.selectAll('.nodetext').attr("transform", d3.event.transform);
+                d3.selectAll('.line').attr("transform", d3.event.transform);
+                d3.selectAll('.linetext').attr("transform", d3.event.transform);
+                d3.selectAll('.nodesymbol').attr("transform", d3.event.transform);
+                d3.selectAll('.nodebutton').attr("transform", d3.event.transform);
                 //_this.svg.selectAll("g").attr("transform", d3.event.transform);
             }));
             _this.svg.on("dblclick.zoom", null); // 静止双击缩放
             //按钮组事件
-            _this.svg.selectAll(".buttongroup").on("click", function (d,i) {
+            _this.svg.selectAll(".buttongroup").on("click", function (d, i) {
                 if (_this.nodebuttonAction) {
                     switch (_this.nodebuttonAction) {
                         case "EDIT":
                             _this.isedit = true;
                             _this.propactiveName = 'propedit';
-                            _this.txx=d.x;
-                            _this.tyy=d.y;
+                            _this.txx = d.x;
+                            _this.tyy = d.y;
                             break;
                         case "MORE":
                             _this.getmorenode();
@@ -804,11 +810,11 @@
                             break;
                         case "LINK":
                             _this.isaddlink = true;
-                            _this.selectsourcenodeid=d.uuid;
+                            _this.selectsourcenodeid = d.uuid;
                             break;
                         case "DELETE":
-                            _this.selectnodeid=d.uuid;
-                            var out_buttongroup_id='.out_buttongroup_'+i;
+                            _this.selectnodeid = d.uuid;
+                            var out_buttongroup_id = '.out_buttongroup_' + i;
                             _this.deletenode(out_buttongroup_id);
                             break;
                     }
@@ -818,19 +824,19 @@
             });
             //按钮组事件绑定
             _this.svg.selectAll(".action_0").on("click", function (d) {
-                _this.nodebuttonAction='EDIT';
+                _this.nodebuttonAction = 'EDIT';
             });
             _this.svg.selectAll(".action_1").on("click", function (d) {
-                _this.nodebuttonAction='MORE';
+                _this.nodebuttonAction = 'MORE';
             });
             _this.svg.selectAll(".action_2").on("click", function (d) {
-                _this.nodebuttonAction='CHILD';
+                _this.nodebuttonAction = 'CHILD';
             });
             _this.svg.selectAll(".action_3").on("click", function (d) {
-                _this.nodebuttonAction='LINK';
+                _this.nodebuttonAction = 'LINK';
             });
             _this.svg.selectAll(".action_4").on("click", function (d) {
-                _this.nodebuttonAction='DELETE';
+                _this.nodebuttonAction = 'DELETE';
             });
         },
         createnode() {
@@ -867,7 +873,7 @@
         },
         createSingleNode() {
             var _this = this;
-            var data = {name:'',r:30};
+            var data = {name: '', r: 30};
             data.domain = _this.domain;
             $.ajax({
                 data: data,
@@ -905,27 +911,27 @@
             //先删除所有为节点自定义的按钮组
             d3.selectAll("svg >defs").remove();
             var nodes = this.graph.nodes;
-            var database = [1,1,1,1,1];
+            var database = [1, 1, 1, 1, 1];
             var pie = d3.pie();
             var piedata = pie(database);
             var nodebutton = this.svg.append("defs");
-            nodes.forEach(function(m){
-                var nbtng=nodebutton.append("g")
-                    .attr("id", "out_circle"+m.uuid);//为每一个节点定制一个按钮组，在画按钮组的时候为其指定该id
-                var buttonEnter=nbtng.selectAll(".buttongroup")
+            nodes.forEach(function (m) {
+                var nbtng = nodebutton.append("g")
+                    .attr("id", "out_circle" + m.uuid);//为每一个节点定制一个按钮组，在画按钮组的时候为其指定该id
+                var buttonEnter = nbtng.selectAll(".buttongroup")
                     .data(piedata)
                     .enter()
                     .append("g")
                     .attr("class", function (d, i) {
-                        return "action_" + i ;
+                        return "action_" + i;
                     });
-                var defaultR=30;
-                if(typeof (m.r)=='undefined'){
-                    m.r=defaultR;
+                var defaultR = 30;
+                if (typeof (m.r) == 'undefined') {
+                    m.r = defaultR;
                 }
                 var arc = d3.arc()
                     .innerRadius(m.r)
-                    .outerRadius(m.r+30);
+                    .outerRadius(m.r + 30);
                 buttonEnter.append("path")
                     .attr("d", function (d) {
                         return arc(d)
@@ -969,11 +975,11 @@
             var uuid = d.uuid;
             var fx = d.fx;
             var fy = d.fy;
-            var ajaxdata = {domain:domain,uuid:uuid,fx:fx,fy:fy};
+            var ajaxdata = {domain: domain, uuid: uuid, fx: fx, fy: fy};
             $.ajax({
                 data: ajaxdata,
                 type: "POST",
-                url: contextRoot+"updateCorrdOfNode",
+                url: contextRoot + "updateCorrdOfNode",
                 success: function (result) {
                     if (result.code == 200) {
                     }
@@ -987,20 +993,20 @@
             var _this = this;
             var nodeEnter = node.enter().append("circle");
             nodeEnter.attr("r", function (d) {
-                if (typeof(d.r) != "undefined" && d.r != '') {
+                if (typeof (d.r) != "undefined" && d.r != '') {
                     return d.r
                 }
                 return 30;
             });
             nodeEnter.attr("fill", function (d) {
-                if (typeof(d.color) != "undefined" && d.color != '') {
+                if (typeof (d.color) != "undefined" && d.color != '') {
                     return d.color
                 }
                 return "#ff4500";
             });
             nodeEnter.style("opacity", 0.8);
             nodeEnter.style("stroke", function (d) {
-                if (typeof(d.color) != "undefined" && d.color != '') {
+                if (typeof (d.color) != "undefined" && d.color != '') {
                     return d.color
                 }
                 return "#ff4500";
@@ -1011,8 +1017,8 @@
                     return d.name;
                 });
             nodeEnter.on("mouseover", function (d, i) {
-            	 _this.nodedetail=d;
-                 _this.timer = setTimeout(function () {
+                _this.nodedetail = d;
+                _this.timer = setTimeout(function () {
                     d3.select('#richContainer')
                         .style('position', 'absolute')
                         .style('left', d.x + "px")
@@ -1024,7 +1030,7 @@
                 }, 2000);
             });
             nodeEnter.on("mouseout", function (d, i) {
-                clearTimeout( _this.timer);
+                clearTimeout(_this.timer);
             });
             nodeEnter.on("dblclick", function (d) {
                 app.updatenodename(d);// 双击更新节点名称
@@ -1039,9 +1045,9 @@
                 if (aa.classList.contains("selected")) return;
                 d3.select(this).style("stroke-width", "2");
             });
-            nodeEnter.on("click", function (d,i) {
+            nodeEnter.on("click", function (d, i) {
                 d3.select('#nodedetail').style('display', 'block');
-                var out_buttongroup_id='.out_buttongroup_'+i;
+                var out_buttongroup_id = '.out_buttongroup_' + i;
                 _this.svg.selectAll(".buttongroup").classed("circle_opreate", true);
                 _this.svg.selectAll(out_buttongroup_id).classed("circle_opreate", false);
                 _this.graphEntity = d;
@@ -1072,7 +1078,7 @@
                 .attr("font-family", "微软雅黑")
                 .attr("text-anchor", "middle")
                 .text(function (d) {
-                	if(typeof(d.name)=='undefined') return '';
+                    if (typeof (d.name) == 'undefined') return '';
                     var length = d.name.length;
                     if (d.name.length > 4) {
                         var s = d.name.slice(0, 4) + "...";
@@ -1129,14 +1135,14 @@
         drawnodebutton(nodebutton) {
             var _this = this;
             var nodebuttonEnter = nodebutton.enter().append("g").append("use")//  为每个节点组添加一个 use 子元素
-                .attr("r", function(d){
+                .attr("r", function (d) {
                     return d.r;
                 })
                 .attr("xlink:href", function (d) {
-                    return "#out_circle"+d.uuid;
+                    return "#out_circle" + d.uuid;
                 }) //  指定 use 引用的内容
-                .attr('class',function(d,i){
-                    return 'buttongroup out_buttongroup_'+i;
+                .attr('class', function (d, i) {
+                    return 'buttongroup out_buttongroup_' + i;
                 })
                 .classed("circle_opreate", true);
 
@@ -1174,7 +1180,7 @@
             });
             linkEnter.on("mouseenter", function (d) {
                 d3.select(this).style("stroke-width", "6").attr("stroke", "#ff9e9e").attr("marker-end", "url(#arrow)");
-                _this.nodedetail=d.lk;
+                _this.nodedetail = d.lk;
                 d3.select('#nodedetail').style('display', 'block');
             });
             linkEnter.on("mouseleave", function (d) {
@@ -1188,7 +1194,7 @@
                 .append("textPath")
                 .attr("startOffset", "50%")
                 .attr("text-anchor", "middle")
-                .attr("xlink:href", function(d) {
+                .attr("xlink:href", function (d) {
                     return "#invis_" + d.lk.sourceid + "-" + d.lk.name + "-" + d.lk.targetid;
                 })
                 .style("font-size", 14)
@@ -1326,7 +1332,7 @@
                 cancelButtonText: '取消',
                 inputValue: this.selectlinkname
             }).then(function (res) {
-                value=res.value;
+                value = res.value;
                 var data = {domain: _this.domain, shipid: _this.selectnodeid, shipname: value};
                 $.ajax({
                     data: data,
@@ -1361,7 +1367,7 @@
                 cancelButtonText: '取消',
                 inputValue: d.name
             }).then(function (res) {
-                value=res.value;
+                value = res.value;
                 var data = {domain: _this.domain, nodeid: d.uuid, nodename: value};
                 $.ajax({
                     data: data,
@@ -1419,15 +1425,16 @@
                 x: d.x,
                 y: d.y
             };
-        },
-        matchalldomaingraph(event){
-
         }
         ,
         matchdomaingraph(domain, event) {
             this.domain = domain.name;
             this.domainid = domain.id;
             this.getdomaingraph()
+        },
+        matchalldomaingraph(int) {
+            this.pagesize = int;
+            this.getalldomaingpraph()
         },
         refreshnode(event) {
             $(".ml-a").removeClass("cur");
@@ -1520,7 +1527,7 @@
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
                         });
@@ -1528,7 +1535,7 @@
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
                         });
@@ -1564,7 +1571,7 @@
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
                         });
@@ -1572,7 +1579,7 @@
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
                         });
@@ -1602,7 +1609,7 @@
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
                             });
-                            if (typeof(sobj) == "undefined") {
+                            if (typeof (sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
                         });
@@ -1636,17 +1643,17 @@ $(function () {
         event.preventDefault();
     });
     $(".graphcontainer").bind("click", function (event) {
-    	if (event.target.tagName!="circle"&&event.target.tagName!="link") {
-        	d3.select('#nodedetail').style('display', 'none');
+        if (event.target.tagName != "circle" && event.target.tagName != "link") {
+            d3.select('#nodedetail').style('display', 'none');
         }
         if (!(event.target.id === "jsoncontainer" || $(event.target).parents("#jsoncontainer").length > 0)) {
-            app.jsonshow=false;
+            app.jsonshow = false;
         }
-        var cursor=document.getElementById("graphcontainer").style.cursor;
-        if(cursor=='crosshair'){
+        var cursor = document.getElementById("graphcontainer").style.cursor;
+        if (cursor == 'crosshair') {
             d3.select('.graphcontainer').style("cursor", "");
-            app.txx=event.offsetX;
-            app.tyy=event.offsetY;
+            app.txx = event.offsetX;
+            app.tyy = event.offsetY;
             app.createSingleNode();
         }
         event.preventDefault();
@@ -1666,9 +1673,9 @@ $(function () {
             $("#richContainer").hide();
         }
         if (!(event.target.id === "nodedetail" || $(event.target).parents("#nodedetail").length > 0)) {
-        	d3.select('#nodedetail').style('display', 'none');
+            d3.select('#nodedetail').style('display', 'none');
         }
-        
+
     });
 });
 	 
