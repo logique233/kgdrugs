@@ -35,6 +35,11 @@ public class KGGraphService implements IKGGraphService {
     }
 
     @Override
+    public HashMap<String, Object> getalldomaingraph(GraphQuery query) {
+        return kgRepository.getalldomaingraph(query);
+    }
+
+    @Override
     public HashMap<String, Object> getdomainnodes(String domain, Integer pageIndex, Integer pageSize) {
         return kgRepository.getdomainnodes(domain, pageIndex, pageSize);
     }

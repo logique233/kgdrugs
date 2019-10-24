@@ -4,11 +4,13 @@ package com.warmer.kgmaker.service;
 import com.warmer.kgmaker.entity.QAEntityItem;
 import com.warmer.kgmaker.query.GraphQuery;
 import com.warmer.kgmaker.util.GraphPageRecord;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface IKGGraphService {
 	/**
 	 * 领域标签分页
@@ -30,6 +32,13 @@ public interface IKGGraphService {
 	 * @return node relationship
 	 */
 	HashMap<String, Object> getdomaingraph(GraphQuery query);
+	/**
+	 * 查询图谱节点和关系
+	 *
+	 * @param query
+	 * @return node relationship
+	 */
+	HashMap<String, Object> getalldomaingraph(GraphQuery query);
 
 	/**
 	 * 获取节点列表
