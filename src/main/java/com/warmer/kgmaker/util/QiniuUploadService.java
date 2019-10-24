@@ -1,11 +1,10 @@
 package com.warmer.kgmaker.util;
 
+import com.qiniu.util.Auth;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.qiniu.util.Auth;
 
 @Configuration
 public class QiniuUploadService {

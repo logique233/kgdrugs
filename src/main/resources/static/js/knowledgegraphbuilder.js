@@ -14,7 +14,7 @@
 	       	domain:_this.domain,
 	       	nodename:_this.nodename,
 	       	pageSize:_this.pagesize
-	       }
+	       };
 	       $.ajax({
 	           data: data,
 	           type: "POST",
@@ -103,11 +103,11 @@
 		        		   newnodes.forEach(function (m) {
 		        			   var sobj=_this.graph.nodes.find(function (x) {
 		       				      return x.uuid === m.uuid
-		       					})
+		       					});
 			       				if(typeof(sobj)=="undefined") {
 			       				 _this.graph.nodes.push(m);
 			       				}
-		        		   })
+		        		   });
 		        		    var newnodescount=_this.graph.nodes.length;
 		        		   if(newnodescount<=oldnodescount){
 		        			   _this.$message({
@@ -119,17 +119,17 @@
 		        		   newships.forEach(function (m) {
 		        			   var sobj=_this.graph.links.find(function (x) {
 			       				      return x.uuid === m.uuid
-			       					})
+			       					});
 				       				if(typeof(sobj)=="undefined") {
 				       				 _this.graph.links.push(m);
 				       			}
-		        		   })
+		        		   });
 		            	   _this.updategraph();
 		               }
 		           },
 		           error: function (data) {}
 		       });
-		}
+		};
 	   var getlabels = function () { 
 		   var _this=this;
 	       var data ={};
@@ -177,9 +177,10 @@
 		          this.$message({
 		            type: 'info',
 		            message: '已取消删除'
-		          });          
-		        });
-		}
+		          });
+
+       })
+       };
 	   var createdomain=function(value){
 			var _this=this;
 			_this.$prompt('请输入领域名称', '提示', {
@@ -209,9 +210,10 @@
 		          this.$message({
 		            type: 'info',
 		            message: '取消输入'
-		          });       
-		        });
-		}
+		          });
+
+       })
+       };
 	   var deletenode = function () { 
 		   var _this=this;
 		   $('#my_custom_menu').hide();
@@ -263,11 +265,10 @@
 		          this.$message({
 		            type: 'info',
 		            message: '已取消删除'
-		          });          
-		        });
-		   
-	      
-	   };
+		          });
+
+       })
+       };
 	   var createlink = function (sourceId,targetId,ship) { 
 		   var _this=this;
 	       var data ={domain:_this.domain,sourceid:sourceId,targetid:targetId,ship:''};
@@ -323,10 +324,10 @@
 		          this.$message({
 		            type: 'info',
 		            message: '已取消删除'
-		          });          
-		        });
-	      
-	   };
+		          });
+
+       })
+       };
 	   var updatenodename=function(d){
 			 var _this=this;
 				_this.$prompt('编辑节点名称', '提示', {
@@ -359,9 +360,10 @@
 			        	_this.$message({
 			            type: 'info',
 			            message: '取消操作'
-			          });       
-			        });
-		 }
+			          });
+
+       })
+       };
 	   var updatelinkName = function () {
 		   var _this=this;
 		   _this.$prompt('请输入关系名称', '提示', {
@@ -393,11 +395,10 @@
 		          this.$message({
 		            type: 'info',
 		            message: '取消输入'
-		          });       
-		        });
-		  
-	      
-	   };
+		          });
+
+       })
+       };
 	   var addmaker=function(){
 		   var arrowMarker = svg.append("marker")
 	        .attr("id","arrow")
@@ -410,7 +411,7 @@
 	        .attr("orient","auto");
 			var arrow_path = "M2,2 L10,6 L2,10 L6,6 L2,2";// 定义箭头形状
 			arrowMarker.append("path").attr("d",arrow_path).attr("fill","#fce6d4");
-	   }	 
+	   };
 	   var drawnode=function(node){
 		 var _this=this;
 		 var nodeEnter= node.enter().append("circle"); 
@@ -465,11 +466,11 @@
 			$('#blank_custom_menu').hide();// 隐藏空白处右键菜单
 			var aa= d3.select(this)._groups[0][0];
 			 if (aa.classList.contains("selected")) {
-				 d3.select(this).style("stroke-width", "2") // 圆外面的轮廓线
-				 d3.select(this).attr("class","nodetext")
+				 d3.select(this).style("stroke-width", "2"); // 圆外面的轮廓线
+				 d3.select(this).attr("class","nodetext");
 				 d.fixed=false;
 			 }else{
-				 d3.select(this).style("stroke-width", "20") 
+				 d3.select(this).style("stroke-width", "20");
 				 d3.select(this).attr("class","nodetext selected")
 			 }
 			 _this.graphEntity=d;
@@ -483,10 +484,10 @@
 			 if(_this.isaddlink){
 				 _this.selecttargetnodeid=d.uuid;
 				 if( _this.selectsourcenodeid==_this.selecttargetnodeid||_this.selectsourcenodeid==0||_this.selecttargetnodeid==0) return;
-				 _this.createlink(_this.selectsourcenodeid,_this.selecttargetnodeid,"RE")
+				 _this.createlink(_this.selectsourcenodeid,_this.selecttargetnodeid,"RE");
 				 _this.selectsourcenodeid=0;
 				 _this.selecttargetnodeid=0;
-				 d.fixed = false
+				 d.fixed = false;
                  d3.event.stopPropagation();
 			 }
 		});
@@ -495,7 +496,7 @@
              .on("drag", dragged)
              .on("end", dragended));
 			return nodeEnter;
-	   }
+	   };
 	   var drawnodetext=function(nodetext){
 		  var _this=this;
 		  var nodetextenter= nodetext.enter().append("text")
@@ -553,16 +554,16 @@
 				 if(_this.isaddlink){
 					 _this.selecttargetnodeid=d.uuid;
 					 if( _this.selectsourcenodeid==_this.selecttargetnodeid||_this.selectsourcenodeid==0||_this.selecttargetnodeid==0) return;
-					 _this.createlink(_this.selectsourcenodeid,_this.selecttargetnodeid,"RE")
+					 _this.createlink(_this.selectsourcenodeid,_this.selecttargetnodeid,"RE");
 					 _this.selectsourcenodeid=0;
 					 _this.selecttargetnodeid=0;
-					 d.fixed = false
+					 d.fixed = false;
 	                 d3.event.stopPropagation();
 				 }
 			});
 
 			return nodetextenter;
-	   }
+	   };
 	   var drawnodesymbol=function(nodesymbol){
            var _this=this;
            var symnol_path = "M566.92736 550.580907c30.907733-34.655573 25.862827-82.445653 25.862827-104.239787 0-108.086613-87.620267-195.805867-195.577173-195.805867-49.015467 0-93.310293 18.752853-127.68256 48.564907l-0.518827-0.484693-4.980053 4.97664c-1.744213 1.64864-3.91168 2.942293-5.59104 4.72064l0.515413 0.484693-134.69696 133.727573L216.439467 534.8352l0 0 137.478827-136.31488c11.605333-10.410667 26.514773-17.298773 43.165013-17.298773 36.051627 0 65.184427 29.197653 65.184427 65.24928 0 14.032213-5.33504 26.125653-12.73856 36.829867l-131.754667 132.594347 0.515413 0.518827c-10.31168 11.578027-17.07008 26.381653-17.07008 43.066027 0 36.082347 29.16352 65.245867 65.184427 65.245867 16.684373 0 31.460693-6.724267 43.035307-17.07008l0.515413 0.512M1010.336427 343.49056c0-180.25472-145.882453-326.331733-325.911893-326.331733-80.704853 0-153.77408 30.22848-210.418347 79.0528l0.484693 0.64512c-12.352853 11.834027-20.241067 28.388693-20.241067 46.916267 0 36.051627 29.16352 65.245867 65.211733 65.245867 15.909547 0 29.876907-6.36928 41.192107-15.844693l0.38912 0.259413c33.624747-28.030293 76.301653-45.58848 123.511467-45.58848 107.99104 0 195.549867 87.6544 195.549867 195.744427 0 59.815253-27.357867 112.71168-69.51936 148.503893l0 0-319.25248 317.928107 0 0c-35.826347 42.2912-88.654507 69.710507-148.340053 69.710507-107.956907 0-195.549867-87.68512-195.549867-195.805867 0-59.753813 27.385173-112.646827 69.515947-148.43904l-92.18048-92.310187c-65.69984 59.559253-107.700907 144.913067-107.700907 240.749227 0 180.28544 145.885867 326.301013 325.915307 326.301013 95.218347 0 180.02944-41.642667 239.581867-106.827093l0.13312 0.129707 321.061547-319.962453-0.126293-0.13312C968.69376 523.615573 1010.336427 438.71232 1010.336427 343.49056L1010.336427 343.49056 1010.336427 343.49056zM1010.336427 343.49056";// 定义回形针形状
@@ -572,7 +573,7 @@
                .on("drag", dragged)
                .on("end", dragended));
            return nodesymbolEnter;
-       }
+       };
 	   var drawlink=function(link){
 		   var _this=this;
 		   var linkEnter = link.enter().append("line")
@@ -606,7 +607,7 @@
 			   d3.select(this).style("stroke-width", "1").attr("stroke","#fce6d4").attr("marker-end","url(#arrow)");
 			});
 	       return linkEnter;
-	   }
+	   };
 	   var drawlinktext=function(link){
 		   var linktextEnter=link.enter().append('text')
 		   .attr("class","linetext")  
@@ -628,7 +629,7 @@
 			     .style('display', 'block');
 			});
 			return linktextEnter;
-	   }
+	   };
 	   var updategraph=function () {
 		   var _this=this;
 		   var lks=this.graph.links;
@@ -685,7 +686,7 @@
 	       node.append("title")// 为每个节点设置title
      		.text(function (d) {
      			return d.name;
-     		}) 
+     		});
 	      // 更新节点文字
 	       var nodetext = nodetextGroup.selectAll("text").data(nodes,function(d) { return d.uuid });
 	       nodetext.exit().remove();
@@ -706,7 +707,7 @@
 			   	return "block";
 			   }
                return "none";
-           })
+           });
 	       simulation.nodes(nodes).alphaTarget(0).alphaDecay(0.05).on("tick", ticked);
 	       simulation.force("link").links(links);
 	       simulation.alpha(1).restart();
@@ -728,7 +729,7 @@
 				   .attr("y", function(d){ return d.y; }); 
 			   // 更新回形针坐标
                nodesymbol.attr("transform", function(d) {
-				   	var l="translate("+(d.x+8)+","+(d.y-30)+") scale(0.015,0.015)"
+				   	var l="translate("+(d.x+8)+","+(d.y-30)+") scale(0.015,0.015)";
 				   	return l;
 				   })
 	         }
@@ -744,22 +745,22 @@
 				
 			})); 
 			svg.on("dblclick.zoom",null); // 静止双击缩放
-		 } 
+		 };
 	   var dragstarted=function (d) {
 		   if (!d3.event.active) simulation.alphaTarget(0.3).restart();
 		   d.fx = d.x;
 		   d.fy = d.y;
 		   d.fixed=true;
-		 }
+		 };
 	   var dragged= function (d) {
 		   d.fx = d3.event.x;
 		   d.fy = d3.event.y;
-		 }
+		 };
 	   var dragended= function (d) {
 		   if (!d3.event.active) simulation.alphaTarget(0);
 		  /* d.fx = null;
 		   d.fy = null;*/
-		 }  
+		 };
 	   var requestFullScreen= function() {
 			 var element= document.getElementById("graphcontainerdiv");
 			 var width =  window.screen.width;
@@ -781,7 +782,7 @@
 		    else if (element.msRequestFullscreen) {
 		        element.msRequestFullscreen();
 		    }
-		}
+		};
 	   var app = new Vue({
 		el: '#app',
 		data:{
@@ -901,7 +902,7 @@
 		            let [tx, ty] = [x / scale - +translate[0] / scale, y / scale - +translate[1] / scale];
 		            txx=x / scale - +translate[0] / scale;
 		            tyy=y / scale - +translate[1] / scale;
-			 })
+			 });
 			 s.on('click', function() {
 	    	   let [x, y] = d3.mouse(this);
 	     	   let { translate, scale } = getTranslateAndScale();		       
@@ -940,7 +941,7 @@
 		        				 insertImg(fileitem.url)
 		        			}
 		                }
-		            }
+		            };
 		        editor.create();
 			},
 			initNodeContent(){
@@ -1191,10 +1192,10 @@
 	 		        cb(results);
 		      },
 		      createFilter(queryString) {
-		        return (domain) => {
+		        return (domain) =;> {
 		          return (domain.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-		        };
-		      },
+                  }
+              },
 		      getFilterDomain(domainList) {
 		    	  var array=[];
 			        for (var i = 0; i < domainList.length; i++) {
@@ -1248,8 +1249,8 @@
 					 var timestamp = Date.parse(new Date());
 					 a.download = timestamp;  //设定下载名称
 					 a.click(); //点击触发下载
-					});
-				 //网上找的下边的方法截图不好使
+             })
+                 //网上找的下边的方法截图不好使
 				/* var svgXml = $('.graphcontainer').html();
 				 var image = new Image();
 				 image.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXml))); //给图片对象写入base64编码的svg流
@@ -1291,19 +1292,19 @@
       	            	 newnodes.forEach(function (m) {
 		        			   var sobj=_this.graph.nodes.find(function (x) {
 		       				      return x.uuid === m.uuid
-		       					})
+		       					});
 			       				if(typeof(sobj)=="undefined") {
 			       				 _this.graph.nodes.push(m);
 			       				}
-		        		   })
+		        		   });
 		        		   newships.forEach(function (m) {
 		        			   var sobj=_this.graph.links.find(function (x) {
 		       				      return x.uuid === m.uuid
-		       					})
+		       					});
 			       				if(typeof(sobj)=="undefined") {
 			       				 _this.graph.links.push(m);
 			       				}
-		        		   })
+		        		   });
 		        		   _this.updategraph();
       	              	   _this.batchcreate.sourcenodename='';
       	              	   _this.batchcreate.targetnodenames='';
@@ -1330,19 +1331,19 @@
         	            	 newnodes.forEach(function (m) {
   		        			   var sobj=_this.graph.nodes.find(function (x) {
   		       				      return x.uuid === m.uuid
-  		       					})
+  		       					});
   			       				if(typeof(sobj)=="undefined") {
   			       				 _this.graph.nodes.push(m);
   			       				}
-  		        		   })
+  		        		   });
   		        		   newships.forEach(function (m) {
   		        			   var sobj=_this.graph.links.find(function (x) {
   		       				      return x.uuid === m.uuid
-  		       					})
+  		       					});
   			       				if(typeof(sobj)=="undefined") {
   			       				 _this.graph.links.push(m);
   			       				}
-  		        		   })
+  		        		   });
   		        		   _this.updategraph();
   		        		   _this.batchcreate.sourcenodename='';
     	              	   _this.batchcreate.targetnodenames='';
@@ -1368,11 +1369,11 @@
   	            	 newnodes.forEach(function (m) {
 	        			   var sobj=_this.graph.nodes.find(function (x) {
 	       				      return x.uuid === m.uuid
-	       					})
+	       					});
 		       				if(typeof(sobj)=="undefined") {
 		       				 _this.graph.nodes.push(m);
 		       				}
-	        		   })
+	        		   });
 	        		   _this.updategraph();
 	              	   _this.batchcreate.sourcenodename='';
 	            	   _this.$message({
@@ -1384,7 +1385,7 @@
 	       }); 
 	 }
 		}
-	  })
+	  });
 	$(function(){
 		 $(".graphcontainer").bind("contextmenu", function(event){
 	          var left=event.clientX;
@@ -1422,6 +1423,6 @@
          }
 		 
 	 });
-	})
+	});
 	 
 	 

@@ -19,10 +19,10 @@ function Cy2NeoD3(config, graphId, tableId, sourceId, execId, urlSource, renderG
 			var query = editor.getValue();
 			console.log("Executing Query",query);
 			var execButton = $(this).find('i');
-			execButton.toggleClass('fa-play-circle-o fa-spinner fa-spin')
+			execButton.toggleClass('fa-play-circle-o fa-spinner fa-spin');
 			neo.executeQuery(query,{},function(err,res) {
-				execButton.toggleClass('fa-spinner fa-spin fa-play-circle-o')
-				res = res || {}
+				execButton.toggleClass('fa-spinner fa-spin fa-play-circle-o');
+				res = res || {};
 				var graph=res.graph;
 				if (renderGraph) {
 					if (graph) {

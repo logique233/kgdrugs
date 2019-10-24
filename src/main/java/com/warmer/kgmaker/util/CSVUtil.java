@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ public class CSVUtil {
 		File dir=new File(path);
 		if(!dir.exists())
 			dir.mkdirs();
-		CsvWriter csvWriter = new CsvWriter(fileNm, ',', Charset.forName("UTF-8"));
+		CsvWriter csvWriter = new CsvWriter(fileNm, ',', StandardCharsets.UTF_8);
 		int rowSize = list.size();
 		int colSize = list.get(0).size();
 		for (int i = 0; i < rowSize; i++) {

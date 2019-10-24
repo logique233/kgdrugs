@@ -3408,7 +3408,7 @@ Text.prototype = {
             if (txtHtml === '<p><br></p>') {
                 // 最后剩下一个空行，就不再删除了
                 e.preventDefault();
-                return;
+
             }
         });
 
@@ -4073,7 +4073,7 @@ UploadImg.prototype = {
             img = null;
             // 无法成功下载图片
             _this2._alert('插入图片错误', 'wangEditor: \u63D2\u5165\u56FE\u7247\u51FA\u9519\uFF0C\u56FE\u7247\u94FE\u63A5\u662F "' + link + '"\uFF0C\u4E0B\u8F7D\u8BE5\u94FE\u63A5\u5931\u8D25');
-            return;
+
         };
         img.onabort = function () {
             img = null;

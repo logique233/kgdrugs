@@ -763,4 +763,4 @@ var graph = {
       "caption": "NOMINATED"
     }
   ]
-}
+};

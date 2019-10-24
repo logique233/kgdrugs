@@ -124,7 +124,7 @@
             var options={
                 collapsed:false,//收缩所有节点
                 withQuotes:false//为key添加双引号
-            }
+            };
             $("#json-renderer").JSONView(json,options);
         },
         cypherrun(){
@@ -175,7 +175,7 @@
                         insertImg(fileitem.url)
                     }
                 }
-            }
+            };
             _this.editor.create();
         },
         initNodeContent() {
@@ -350,7 +350,7 @@
                 domain: _this.domain,
                 nodename: _this.nodename,
                 pageSize: _this.pagesize
-            }
+            };
             $.ajax({
                 data: data,
                 type: "POST",
@@ -404,11 +404,11 @@
                         newnodes.forEach(function (m) {
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
-                        })
+                        });
                         var newnodescount = _this.graph.nodes.length;
                         if (newnodescount <= oldnodescount) {
                             _this.$message({
@@ -420,11 +420,11 @@
                         newships.forEach(function (m) {
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
-                        })
+                        });
                         _this.updategraph();
                     }
                 },
@@ -527,7 +527,7 @@
         },
         getmoredomain() {
             var _this = this;
-            _this.pageModel.pageIndex=_this.pageModel.pageIndex+1
+            _this.pageModel.pageIndex=_this.pageModel.pageIndex+1;
             var data = {pageIndex:_this.pageModel.pageIndex};
             $.ajax({
                 data: data,
@@ -695,7 +695,7 @@
                     return "block";
                 }
                 return "none";
-            })
+            });
             _this.simulation.nodes(nodes).on("tick", ticked);
             _this.simulation.force("link").links(links);
             _this.simulation.alphaTarget(1).restart();
@@ -714,7 +714,7 @@
             }
 
             function ticked() {
-                link.attr("d", linkArc)
+                link.attr("d", linkArc);
                 // 更新节点坐标
                 node.attr("cx", function (d) {
                     return d.x;
@@ -731,7 +731,7 @@
                     });
                nodebutton.attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y+ ") scale(1)";
-                })
+                });
 
                 // 更新文字坐标
                 nodetext.attr("x", function (d) {
@@ -915,7 +915,7 @@
                     })
                     .attr("text-anchor", "middle")
                     .text(function (d, i) {
-                        var zi = new Array()
+                        var zi = [];
                         zi[0] = "编辑";
                         zi[1] = "展开";
                         zi[2] = "追加";
@@ -984,7 +984,7 @@
             nodeEnter.append("title")// 为每个节点设置title
                 .text(function (d) {
                     return d.name;
-                })
+                });
             nodeEnter.on("mouseover", function (d, i) {
             	 _this.nodedetail=d;
                  _this.timer = setTimeout(function () {
@@ -1026,10 +1026,10 @@
                 if (_this.isaddlink) {
                     _this.selecttargetnodeid = d.uuid;
                     if (_this.selectsourcenodeid == _this.selecttargetnodeid || _this.selectsourcenodeid == 0 || _this.selecttargetnodeid == 0) return;
-                    _this.createlink(_this.selectsourcenodeid, _this.selecttargetnodeid, "RE")
+                    _this.createlink(_this.selectsourcenodeid, _this.selecttargetnodeid, "RE");
                     _this.selectsourcenodeid = 0;
                     _this.selecttargetnodeid = 0;
-                    d.fixed = false
+                    d.fixed = false;
                     d3.event.stopPropagation();
                 }
             });
@@ -1081,10 +1081,10 @@
                 if (_this.isaddlink) {
                     _this.selecttargetnodeid = d.uuid;
                     if (_this.selectsourcenodeid == _this.selecttargetnodeid || _this.selectsourcenodeid == 0 || _this.selecttargetnodeid == 0) return;
-                    _this.createlink(_this.selectsourcenodeid, _this.selecttargetnodeid, "RE")
+                    _this.createlink(_this.selectsourcenodeid, _this.selecttargetnodeid, "RE");
                     _this.selectsourcenodeid = 0;
                     _this.selecttargetnodeid = 0;
-                    d.fixed = false
+                    d.fixed = false;
                     d3.event.stopPropagation();
                 }
             });
@@ -1395,6 +1395,10 @@
                 y: d.y
             };
         },
+        matchalldomaingraph(event){
+
+        }
+        ,
         matchdomaingraph(domain, event) {
             this.domain = domain.name;
             this.domainid = domain.id;
@@ -1490,19 +1494,19 @@
                         newnodes.forEach(function (m) {
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
-                        })
+                        });
                         newships.forEach(function (m) {
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
-                        })
+                        });
                         _this.updategraph();
                         _this.batchcreate.sourcenodename = '';
                         _this.batchcreate.targetnodenames = '';
@@ -1534,19 +1538,19 @@
                         newnodes.forEach(function (m) {
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
-                        })
+                        });
                         newships.forEach(function (m) {
                             var sobj = _this.graph.links.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.links.push(m);
                             }
-                        })
+                        });
                         _this.updategraph();
                         _this.batchcreate.sourcenodename = '';
                         _this.batchcreate.targetnodenames = '';
@@ -1572,11 +1576,11 @@
                         newnodes.forEach(function (m) {
                             var sobj = _this.graph.nodes.find(function (x) {
                                 return x.uuid === m.uuid
-                            })
+                            });
                             if (typeof(sobj) == "undefined") {
                                 _this.graph.nodes.push(m);
                             }
-                        })
+                        });
                         _this.updategraph();
                         _this.batchcreate.sourcenodename = '';
                         _this.$message({
@@ -1588,14 +1592,14 @@
             });
         }
     }
-})
+});
 $(function () {
     $(".blankmenubar").click(function () {
         $('#blank_menubar').hide();
-    })
+    });
     $(".blankmenubar").mouseleave(function () {
         $('#blank_menubar').hide();
-    })
+    });
     $(".graphcontainer").bind("contextmenu", function (event) {
         app.svg.selectAll(".buttongroup").classed("circle_opreate", true);
         var left = event.clientX;
@@ -1641,6 +1645,6 @@ $(function () {
         }
         
     });
-})
+});
 	 
 	 

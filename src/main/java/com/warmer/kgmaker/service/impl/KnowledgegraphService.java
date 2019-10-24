@@ -1,14 +1,13 @@
 package com.warmer.kgmaker.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
+import com.warmer.kgmaker.dal.IKnowledgegraphRepository;
+import com.warmer.kgmaker.service.IKnowledgegraphService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.warmer.kgmaker.dal.IKnowledgegraphRepository;
-import com.warmer.kgmaker.service.IKnowledgegraphService;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class KnowledgegraphService implements IKnowledgegraphService {

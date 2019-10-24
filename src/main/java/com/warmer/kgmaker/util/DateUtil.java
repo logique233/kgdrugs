@@ -277,23 +277,23 @@ public class DateUtil {
 		String asDate;
 		Calendar cl = Calendar.getInstance();
 		year = Integer.valueOf(psDate.substring(0, 4)).intValue();
-		cl.set(cl.YEAR, year);
+		cl.set(Calendar.YEAR, year);
 		// Calendar的月份是从0开始的
 		month = Integer.valueOf(psDate.substring(4, 6)).intValue() - 1;
-		cl.set(cl.MONTH, month);
+		cl.set(Calendar.MONTH, month);
 		day = Integer.valueOf(psDate.substring(6)).intValue();
-		cl.set(cl.DAY_OF_MONTH, day);
-		cl.add(cl.DATE, piValue);
-		year = cl.get(cl.YEAR);
-		month = cl.get(cl.MONDAY) + 1;
-		day = cl.get(cl.DAY_OF_MONTH);
+		cl.set(Calendar.DAY_OF_MONTH, day);
+		cl.add(Calendar.DATE, piValue);
+		year = cl.get(Calendar.YEAR);
+		month = cl.get(Calendar.MONDAY) + 1;
+		day = cl.get(Calendar.DAY_OF_MONTH);
 		asDate = String.valueOf(year);
 		if (month < 10)
-			asDate += "0" + String.valueOf(month);
+			asDate += "0" + month;
 		else
 			asDate += String.valueOf(month);
 		if (day < 10)
-			asDate += "0" + String.valueOf(day);
+			asDate += "0" + day;
 		else
 			asDate += String.valueOf(day);
 		return asDate;
@@ -317,11 +317,11 @@ public class DateUtil {
 			month = 0;
 		}
 		Calendar cl = Calendar.getInstance();
-		cl.set(cl.YEAR, year);
-		cl.set(cl.MONTH, month);
-		cl.set(cl.DAY_OF_MONTH, 1);
-		cl.add(cl.DATE, -1);
-		return String.valueOf(cl.get(cl.DAY_OF_MONTH));
+		cl.set(Calendar.YEAR, year);
+		cl.set(Calendar.MONTH, month);
+		cl.set(Calendar.DAY_OF_MONTH, 1);
+		cl.add(Calendar.DATE, -1);
+		return String.valueOf(cl.get(Calendar.DAY_OF_MONTH));
 	}
 
 	/**

@@ -105,7 +105,7 @@ function Neod3Renderer() {
                     currentColor = (currentColor + 1) % colors.length;
                     var textColor = window.isInternetExplorer ? '#000000' : color['text-color-internal'];
                     var style = {selector:selector, caption:styleCaptions[selector], color:color.color, 
-                         "border-color":color['border-color'], "text-color-internal":textColor,"text-color-external": textColor }
+                         "border-color":color['border-color'], "text-color-internal":textColor,"text-color-external": textColor };
                     styles[selector] = style;
                 }
             }
@@ -174,7 +174,7 @@ function Neod3Renderer() {
             return label ? label.substring(5) : "";
           }).attr('y', function(node) {
               return (keys.indexOf(node)+1)*2.2*r+6;
-          })
+          });
 /*
           .attr('stroke', function(node) {
             return styles[node]['color'];
@@ -224,7 +224,7 @@ function Neod3Renderer() {
         zoomHandlers.mousedown = renderer.on("mousedown.zoom");
         zoomHandlers.DOMMouseScroll = renderer.on("DOMMouseScroll.zoom");
         zoomHandlers.touchstart = renderer.on("touchstart.zoom");
-        zoomHandlers.touchmove = renderer.on("touchmove.zoom")
+        zoomHandlers.touchmove = renderer.on("touchmove.zoom");
         zoomHandlers.touchend = renderer.on("touchend.zoom");
         disableZoomHandlers();
 

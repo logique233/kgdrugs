@@ -46,7 +46,7 @@ window.CodeMirror = (function() {
     for (var opt in defaults) if (!options.hasOwnProperty(opt) && defaults.hasOwnProperty(opt)) {
       options[opt] = defaults[opt];
     }
-console.log("CM",options)
+console.log("CM",options);
     setGuttersForLineNumbers(options);
     var docStart = typeof options.value == "string" ? 0 : options.value.first;
     var display = this.display = makeDisplay(place, docStart);
@@ -5356,8 +5356,12 @@ console.log("CM",options)
       delayedCallbacks = [];
       setTimeout(fireDelayed, 0);
     }
-    function bnd(f) {return function(){f.apply(null, args);};};
-    for (var i = 0; i < arr.length; ++i)
+      function bnd(f) {
+          return function () {
+              f.apply(null, args);
+          };
+      }
+      for (var i = 0; i < arr.length; ++i)
       delayedCallbacks.push(bnd(arr[i]));
   }
 

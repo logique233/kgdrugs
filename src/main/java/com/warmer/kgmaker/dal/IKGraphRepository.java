@@ -29,6 +29,13 @@ public interface IKGraphRepository {
 	 * @return node relationship
 	 */
 	HashMap<String, Object> getdomaingraph(GraphQuery query);
+	/**
+	 * 查询所有图谱节点和关系
+	 *
+	 * @param query
+	 * @return node relationship
+	 */
+	HashMap<String, Object> getalldomaingraph(GraphQuery query);
 
 	/**
 	 * 获取节点列表

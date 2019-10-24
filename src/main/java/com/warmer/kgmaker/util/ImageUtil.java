@@ -1,13 +1,8 @@
 
 package com.warmer.kgmaker.util;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import org.springframework.web.multipart.MultipartFile;
+import java.io.*;
 
 public class ImageUtil {
 	

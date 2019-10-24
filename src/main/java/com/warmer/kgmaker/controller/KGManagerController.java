@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Controller
@@ -43,13 +44,10 @@ public class KGManagerController extends BaseController {
 	private IKnowledgegraphService kgservice;
 
 	@GetMapping("/")
-	public String home(Model model) {
+	public String  home(Model model) {
 		return "kg/home";
 	}
-	@GetMapping("/kg/index")
-	public String index(Model model) {
-		return "kg/index";
-	}
+
 	@ResponseBody
 	@RequestMapping(value = "/getgraph") // call db.labels
 	public R<GraphPageRecord<Map<String, Object>>> getgraph(GraphQuery queryItem) {
@@ -517,7 +515,7 @@ public class KGManagerController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		CsvWriter csvWriter = new CsvWriter(fileUrl, ',', Charset.forName("UTF-8"));
+		CsvWriter csvWriter = new CsvWriter(fileUrl, ',', StandardCharsets.UTF_8);
 		String[] header = { "source", "target", "relation" };
 		csvWriter.writeRecord(header);
 		for (HashMap<String, Object> hashMap : list) {

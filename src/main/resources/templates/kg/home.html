@@ -154,6 +154,9 @@
                     <el-button type="info" style="margin: 2px 0 4px 2px;" plain size="small" @click="createdomain">
                         新建图谱
                     </el-button>
+                    <a href="javascript:void(0)" @click="">
+                        <el-tag closable style="margin:2px" @close="deletedomain(m.id,m.name)">m.name</el-tag>
+                    </a>
                     <a @click="matchdomaingraph(m,$event)" v-for="m in pageModel.nodeList" href="javascript:void(0)">
                         <el-tag closable style="margin:2px" @close="deletedomain(m.id,m.name)">{{m.name}}</el-tag>
                     </a>
@@ -236,7 +239,8 @@
                 </div>
 
                 <div v-show="tipsshow" id="operatetips" class="operatetips">
-                    <span style="color:red;position:absolute;top:6px;left:10px;cursor:pointer;" @click="btntipsclose">x</span>
+                    <span style="color:red;position:absolute;top:6px;left:10px;cursor:pointer;"
+                          @click="btntipsclose">x</span>
                     <h3>tips</h3>
                     <ul>
                         <li>1.选中节点或者节点名称，双击修改名称</li>

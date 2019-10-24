@@ -1,25 +1,7 @@
 package com.warmer.kgmaker.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.classification.classifiers.IClassifier;
-import com.hankcs.hanlp.classification.classifiers.NaiveBayesClassifier;
-import com.hankcs.hanlp.classification.models.NaiveBayesModel;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
-import com.warmer.kgmaker.util.TestUtility;
 
 @RestController
 @RequestMapping("/kg")
