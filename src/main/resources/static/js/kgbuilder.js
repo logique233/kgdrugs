@@ -343,6 +343,31 @@
                 element.msRequestFullscreen();
             }
         },
+        getalldomaingpraph(){
+            var _this = this;
+            _this.loading = true;
+            var date ={
+                pageSize: _this.pagesize
+            }
+            $.ajax(
+                {
+                    data: data,
+                    type: "POST",
+                    url: contextRoot + "getalldomaingraph",
+                    success: function (result) {
+                        if (result.code == 200) {
+                            var graphModel = result.data;
+                            if (graphModel != null) {
+                                _this.graph.nodes = graphModel.node;
+                                _this.graph.links = graphModel.relationship;
+                                _this.updategraph();
+                            }
+                        }
+                    }
+                }
+            )
+        }
+        ,
         getdomaingraph() {
             var _this = this;
             _this.loading = true;
