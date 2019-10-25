@@ -298,7 +298,7 @@ public class KGraphRepository implements IKGraphRepository {
         HashMap<String, Object> result = new HashMap<String, Object>();
         List<HashMap<String, Object>> graphNodeList = new ArrayList<HashMap<String, Object>>();
         try {
-            String cypherSql = String.format("MATCH (n:`%s`) where id(n)=%s set n.name='%s' return n", domain, nodeid,
+            String cypherSql = String.format("MATCH (n) where id(n)=%s set n.name='%s' return n", nodeid,
                     nodename);
             graphNodeList = neo4jUtil.GetGraphNode(cypherSql);
             if (graphNodeList.size() > 0) {
@@ -475,8 +475,8 @@ public class KGraphRepository implements IKGraphRepository {
     public HashMap<String, Object> createlink(String domain, long sourceid, long targetid, String ship) {
         HashMap<String, Object> rss = new HashMap<String, Object>();
         try {
-            String cypherSql = String.format("MATCH (n:`%s`),(m:`%s`) WHERE id(n)=%s AND id(m) = %s "
-                    + "CREATE (n)-[r:RE{name:'%s'}]->(m)" + "RETURN r", domain, domain, sourceid, targetid, ship);
+            String cypherSql = String.format("MATCH (n),(m) WHERE id(n)=%s AND id(m) = %s "
+                    + "CREATE (n)-[r:RE{name:'%s'}]->(m)" + "RETURN r", sourceid, targetid, ship);
             List<HashMap<String, Object>> cypherResult = neo4jUtil.GetGraphRelationShip(cypherSql);
             if (cypherResult.size() > 0) {
                 rss = cypherResult.get(0);
@@ -679,14 +679,14 @@ public class KGraphRepository implements IKGraphRepository {
     public void updateCorrdOfNode(String domain, String uuid, Double fx, Double fy) {
         String cypher = null;
         if (fx == null && fy == null) {
-            cypher = " MATCH (n:" + domain + ") where ID(n)=" + uuid
+            cypher = " MATCH (n) where ID(n)=" + uuid
                     + " set n.fx=null, n.fy=null; ";
         } else {
             if ("0.0".equals(fx.toString()) && "0.0".equals(fy.toString())) {
-                cypher = " MATCH (n:" + domain + ") where ID(n)=" + uuid
+                cypher = " MATCH (n) where ID(n)=" + uuid
                         + " set n.fx=null, n.fy=null; ";
             } else {
-                cypher = " MATCH (n:" + domain + ") where ID(n)=" + uuid
+                cypher = " MATCH (n) where ID(n)=" + uuid
                         + " set n.fx=" + fx + ", n.fy=" + fy + ";";
             }
         }
