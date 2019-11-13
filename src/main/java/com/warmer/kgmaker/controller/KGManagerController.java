@@ -31,6 +31,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/")
 public class KGManagerController extends BaseController {
@@ -48,6 +49,7 @@ public class KGManagerController extends BaseController {
         return "kg/home";
     }
 
+    @CrossOrigin
     @ResponseBody
     @RequestMapping(value = "/getgraph") // call db.labels
     public R<GraphPageRecord<Map<String, Object>>> getgraph(GraphQuery queryItem) {
