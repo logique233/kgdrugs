@@ -155,7 +155,7 @@
                         新建图谱
                     </el-button>
                     <a href="javascript:void(0)" @click="matchalldomaingraph(500)">
-                        <el-tag style="margin:2px" >所有节点</el-tag>
+                        <el-tag style="margin:2px">所有节点</el-tag>
                     </a>
                     <a @click="matchdomaingraph(m,$event)" v-for="m in pageModel.nodeList" href="javascript:void(0)">
                         <el-tag closable style="margin:2px" @close="deletedomain(m.id,m.name)">{{m.name}}</el-tag>
@@ -259,7 +259,7 @@
                 <div id="graphcontainer" class="graphcontainer"></div>
             </el-scrollbar>
             <!-- 中部over -->
-            <div class="svg-set-box"></div>
+<!--            <div class="svg-set-box"></div>-->
             <!-- 底部 -->
             <el-dialog title="csv导入图谱" :visible.sync="dialogFormVisible" width="30%">
                 <el-form>
