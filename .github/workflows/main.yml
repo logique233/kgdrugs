@@ -16,4 +16,4 @@ jobs:
         java -version
         mvn -v
         mvn test
-        docker version
+        echo ${{ secrets.DOCKER }}
