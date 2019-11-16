@@ -21,11 +21,11 @@ jobs:
 #          registry: ${{ secrets.DOCKER_REGISTRY }}
 #          tag_names: true
     - name: Build & Push to Docker Hub
-        uses: opspresso/action-docker@master
-        env:
-          USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          IMAGE_NAME: "logicrain/kgdrug"
-          TAG_NAME: "v0.0.1"
-          LATEST: "true"
+      uses: opspresso/action-docker@master
+      env:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+        IMAGE_NAME: "logicrain/kgdrug"
+        TAG_NAME: "v0.0.1"
+        LATEST: "true"
