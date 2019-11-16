@@ -21,12 +21,11 @@ jobs:
         TAG_NAME: "v0.0.1"
         LATEST: "true"
     - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
+      uses: fifsky/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        password: ${{ secrets.SSH_PASSWORD }}
+        user: ${{ secrets.SSH_USER }}
+        pass: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
-        script: |
-          whoami
+        command: |
           ls -al
