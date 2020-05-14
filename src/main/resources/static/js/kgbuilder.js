@@ -370,8 +370,7 @@
                     }
                 }
             )
-        }
-        ,
+        },
         getdomaingraph() {
             var _this = this;
             _this.loading = true;
@@ -905,7 +904,7 @@
                 .attr("refY", "0")
                 .attr("orient", "auto");
             var arrow_path = "M0,-5L10,0L0,5";// 定义箭头形状
-            arrowMarker.append("path").attr("d", arrow_path).attr("fill", "#fce6d4");
+            arrowMarker.append("path").attr("d", arrow_path).attr("fill", "#381924");
         },
         addnodebutton(r) {
             //先删除所有为节点自定义的按钮组
@@ -1073,7 +1072,7 @@
         drawnodetext(nodetext) {
             var _this = this;
             var nodetextenter = nodetext.enter().append("text")
-                .style("fill", "#fff")
+                .style("fill", "#381924")
                 .attr("dy", 4)
                 .attr("font-family", "微软雅黑")
                 .attr("text-anchor", "middle")
@@ -1152,7 +1151,7 @@
             var _this = this;
             var linkEnter = link.enter().append("path")
                 .attr("stroke-width", 1)
-                .attr("stroke", "#fce6d4")
+                .attr("stroke", "#381924")
                 .attr("fill", "none")
                 .attr("id", function (d) {
                     return "invis_" + d.lk.sourceid + "-" + d.lk.name + "-" + d.lk.targetid;
@@ -1179,18 +1178,18 @@
                 d3.event.stopPropagation();// 禁止空白处右键
             });
             linkEnter.on("mouseenter", function (d) {
-                d3.select(this).style("stroke-width", "6").attr("stroke", "#ff9e9e").attr("marker-end", "url(#arrow)");
+                d3.select(this).style("stroke-width", "6").attr("stroke", "#381924").attr("marker-end", "url(#arrow)");
                 _this.nodedetail = d.lk;
                 d3.select('#nodedetail').style('display', 'block');
             });
             linkEnter.on("mouseleave", function (d) {
-                d3.select(this).style("stroke-width", "1").attr("stroke", "#fce6d4").attr("marker-end", "url(#arrow)");
+                d3.select(this).style("stroke-width", "1").attr("stroke", "#381924").attr("marker-end", "url(#arrow)");
             });
             return linkEnter;
         },
         drawlinktext(link) {
             var linktextEnter = link.enter().append('text')
-                .style('fill', '#e3af85')
+                .style('fill', '#381924')
                 .append("textPath")
                 .attr("startOffset", "50%")
                 .attr("text-anchor", "middle")
@@ -1425,8 +1424,7 @@
                 x: d.x,
                 y: d.y
             };
-        }
-        ,
+        },
         matchdomaingraph(domain, event) {
             this.domain = domain.name;
             this.domainid = domain.id;
