@@ -41,4 +41,4 @@ qiniu:
 
 file:
   serverurl:  http://localhost:8089
-  location : /home/logic/csv/   #如果是Windows情况下，格式是 D:\\kgmanager\\csv\\   linx 格式"/home/kgmanager/csv/";
+  location : /root/   #如果是Windows情况下，格式是 D:\\kgmanager\\csv\\   linx 格式"/home/kgmanager/csv/";
