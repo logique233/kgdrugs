@@ -442,6 +442,23 @@ public class KGManagerController extends BaseController {
             String serverUrl = request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             String csvUrl = "http://" + serverUrl + "/download/" + filename;
             //String csvUrl = "https://neo4j.com/docs/cypher-manual/3.5/csv/artists.csv";
+            if (!StringUtil.isBlank(label)) {
+                List<Map<String, Object>> domainItem = kgservice.getDomainByName(label);
+                if (domainItem.size() > 0) {
+                    res.put("code", "500");
+                    res.put("msg", "已存在");
+                } else {
+                    String name = "tc";
+                    Map<String, Object> maps = new HashMap<String, Object>();
+                    maps.put("name", label);
+                    maps.put("nodecount", 1);
+                    maps.put("shipcount", 0);
+                    maps.put("status", 1);
+                    maps.put("createuser", name);
+                    kgservice.saveDomain(maps);// 保存到mysql
+                }
+            }
+
             KGGraphService.batchInsertByCSV(label, csvUrl, 0);
             res.put("code", 200);
             res.put("message", "success!");
