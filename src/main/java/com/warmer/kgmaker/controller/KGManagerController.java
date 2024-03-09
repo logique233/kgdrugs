@@ -117,7 +117,7 @@ public class KGManagerController extends BaseController {
         R<HashMap<String, Object>> result = new R<HashMap<String, Object>>();
         String error = "";
         try {
-            HashMap<String, Object> graphData = neo4jUtil.GetGraphNodeAndShip(cypher);
+            HashMap<String, Object> graphData = neo4jUtil.getGraphNodeAndShip(cypher);
             result.code = 200;
             result.data = graphData;
         } catch (Exception e) {
@@ -544,7 +544,7 @@ public class KGManagerController extends BaseController {
         String fileUrl = filePath + File.separator + fileName;
         String cypher = String.format(
                 "MATCH (n:%s) -[r]->(m:%s) return n.name as source,m.name as target,r.name as relation", label, label);
-        List<HashMap<String, Object>> list = neo4jUtil.GetGraphItem(cypher);
+        List<HashMap<String, Object>> list = neo4jUtil.getGraphTable(cypher);
         File file = new File(fileUrl);
         try {
             if (!file.exists()) {

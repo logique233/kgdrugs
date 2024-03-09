@@ -8,7 +8,7 @@ import java.util.List;
 public class GraphPageRecord<T> implements Serializable{	
     private int pageSize = 10;
     private int pageIndex = 1;
-    private int totalCount = 0;
+    private long totalCount = 0;
     private List<T> nodeList = new ArrayList<T>();
 
 
@@ -47,14 +47,14 @@ public class GraphPageRecord<T> implements Serializable{
     /**
      * 获取总记录数    
      */
-    public int getTotalCount() {
+    public long getTotalCount() {
         return totalCount;
     }
     /**
      * 获取总记录数    
      * @param totalCount
      */
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
     }
    

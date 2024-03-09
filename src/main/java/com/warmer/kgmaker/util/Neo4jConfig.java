@@ -1,13 +1,15 @@
 package com.warmer.kgmaker.util;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties(prefix = "spring.neo4j") //指明配置节点
 public class Neo4jConfig {
 	@Value("${spring.neo4j.url}")
 	private String url;
@@ -20,8 +22,6 @@ public class Neo4jConfig {
 
 	/**
 	 * 图数据库驱动模式
-	 *
-	 * @return
 	 */
 
 	@Bean
