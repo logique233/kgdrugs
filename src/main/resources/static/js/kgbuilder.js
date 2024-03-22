@@ -616,11 +616,11 @@
             });
             lks.forEach(function (m) {
                 var sourceNode = nodes.filter(function (n) {
-                    return n.uuid === m.sourceid;
+                    return n.uuid === m.sourceId;
                 })[0];
                 if (typeof (sourceNode) == 'undefined') return;
                 var targetNode = nodes.filter(function (n) {
-                    return n.uuid === m.targetid;
+                    return n.uuid === m.targetId;
                 })[0];
                 if (typeof (targetNode) == 'undefined') return;
                 links.push({source: sourceNode.uuid, target: targetNode.uuid, lk: m});
